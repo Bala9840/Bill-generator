@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waybill Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Include -->
+    <div id="header-placeholder"></div>
+
+    <div class="container">
+        <div class="app-container">
+            <div class="form-section">
+                <h2>Trip Information</h2>
+                <form id="tripForm">
+                    <div class="form-group">
+                        <label for="passengerName">Passenger Name:</label>
+                        <input type="text" id="passengerName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="viaService">Via:</label>
+                        <select id="viaService" required>
+                            <option value="Uber">Uber</option>
+                            <option value="Ola">Ola</option>
+                            <option value="Rapido">Rapido</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fromLocation">From:</label>
+                        <div class="location-input">
+                            <input type="text" id="fromLocation" placeholder="Search location..." required>
+                            <button type="button" id="fromCurrentLocation">Use Current</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="toLocation">To:</label>
+                        <div class="location-input">
+                            <input type="text" id="toLocation" placeholder="Search location..." required>
+                            <button type="button" id="toCurrentLocation">Use Current</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tripDate">Date:</label>
+                        <input type="date" id="tripDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tripTime">Time:</label>
+                        <input type="time" id="tripTime" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeFormat">AM/PM:</label>
+                        <select id="timeFormat">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+
+                    <h2>Driver Information</h2>
+                    <div class="form-group">
+                        <label for="driverName">Driver Name:</label>
+                        <div class="input-with-edit">
+                            <input type="text" id="driverName" value="MADHAN S">
+                            <button type="button" class="edit-btn" id="editDriverBtn">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="licensePlate">License Plate #:</label>
+                        <div class="input-with-edit">
+                            <input type="text" id="licensePlate" value="TN25CH9124">
+                            <button type="button" class="edit-btn" id="editLicenseBtn">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="passengerCapacity">Passenger Capacity:</label>
+                        <div class="input-with-edit">
+                            <input type="number" id="passengerCapacity" min="1" max="10" value="4">
+                            <button type="button" class="edit-btn" id="editCapacityBtn">Edit</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="generateBtn">Generate Waybill</button>
+                </form>
+            </div>
+
+            <div class="preview-section">
+                <h2>Preview</h2>
+                <div id="waybillPreview" class="waybill">
+                    <h1>Waybill</h1>
+                    
+                    <h2>Trip</h2>
+                    <p><strong>Trip #</strong> <span id="previewTripId">8c33e52e-98f5-4fdc-b8fb-0837e58afa4e</span></p>
+                    <p><strong>Time</strong> <span id="previewTime">08/18/25 19:50:32 IST</span></p>
+                    <p><strong>Passenger Name</strong> <span id="previewPassenger">Gunavathy B</span></p>
+                    <p><strong>Via</strong> <span id="previewVia">Uber</span></p>
+                    <p><strong>From</strong> <span id="previewFrom">Saidapet, Chennai TN 600015, IN</span></p>
+                    <p><strong>To</strong> <span id="previewTo">Nehru Nagar, Perungudi, Chennai TN 600041, IN</span></p>
+                    
+                    <hr>
+                    
+                    <h2>Driver</h2>
+                    <p><strong>Name</strong> <span id="previewDriver">MADHAN S</span></p>
+                    <p><strong>License Plate #</strong> <span id="previewLicense">TN25CH9124</span></p>
+                    <p><strong>Passenger Capacity</strong> <span id="previewCapacity">4</span></p>
+                </div>
+                <button id="downloadBtn" disabled>Download as Image</button>
+            </div>
+        </div>
+
+        <div class="trips-section" id="trips">
+            <h2>Saved Trips</h2>
+            <div class="trip-actions">
+                <button id="clearAllBtn">Clear All Trips</button>
+            </div>
+            <div id="tripsList" class="trips-list">
+                <!-- Trips will be listed here -->
+            </div>
+        </div>
+
+        <div class="driver-profile-section" id="driver-profile">
+            <h2>Driver Profile Settings</h2>
+            <div class="profile-form">
+                <div class="form-group">
+                    <label for="profileDriverName">Driver Name:</label>
+                    <input type="text" id="profileDriverName" value="MADHAN S">
+                </div>
+                <div class="form-group">
+                    <label for="profileLicensePlate">License Plate #:</label>
+                    <input type="text" id="profileLicensePlate" value="TN25CH9124">
+                </div>
+                <div class="form-group">
+                    <label for="profilePassengerCapacity">Passenger Capacity:</label>
+                    <input type="number" id="profilePassengerCapacity" min="1" max="10" value="4">
+                </div>
+                <button id="saveProfileBtn">Save Profile Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Include -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Include html2canvas for image generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
