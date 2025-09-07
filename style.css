@@ -346,6 +346,7 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     max-width: 500px;
 }
 
+/* Mobile Responsive Styles */
 @media (max-width: 900px) {
     .app-container {
         flex-direction: column;
@@ -370,10 +371,68 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     }
     
     .waybill-row {
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .waybill-label {
-        margin-bottom: 5px;
+        margin-bottom: 0;
+        flex: 1;
+    }
+    
+    .waybill-value {
+        flex: 2;
+    }
+    
+    .trip-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .trip-actions {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .trip-actions button {
+        flex: 1;
+        margin: 0 5px;
+    }
+    
+    .input-with-edit, .location-input {
+        flex-direction: column;
+    }
+    
+    .input-with-edit .edit-btn, .location-input button {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .form-section, .preview-section, .trips-section, .driver-profile-section {
+        padding: 15px;
+    }
+    
+    .waybill {
+        padding: 15px;
+    }
+    
+    .waybill-row {
+        flex-direction: column;
+        margin: 8px 0;
+    }
+    
+    .waybill-label {
+        margin-bottom: 3px;
+    }
+    
+    button[type="submit"], #downloadBtn, .trip-actions button, #saveProfileBtn {
+        padding: 12px 15px;
+        font-size: 14px;
     }
 }
