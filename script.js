@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('viaService').addEventListener('change', updatePreview);
     document.getElementById('fromLocation').addEventListener('input', updatePreview);
     document.getElementById('toLocation').addEventListener('input', updatePreview);
+    document.getElementById('tripAmount').addEventListener('input', updatePreview);
     document.getElementById('tripDate').addEventListener('change', updatePreview);
     document.getElementById('tripTime').addEventListener('change', updatePreview);
     document.getElementById('timeFormat').addEventListener('change', updatePreview);
@@ -54,8 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
 function loadHeader() {
     fetch('header.html')
         .then(response => response.text())
@@ -68,7 +67,7 @@ function loadHeader() {
                 <header>
                     <div class="header-content">
                         <div class="logo">
-                            <h1>Waybill Generator</h1>
+                            <h1>Trip Waybill</h1>
                         </div>
                     </div>
                 </header>
@@ -169,6 +168,10 @@ function updatePreview() {
     document.getElementById('previewFrom').textContent = document.getElementById('fromLocation').value || 'Saidapet, Chennai TN 600015, IN';
     document.getElementById('previewTo').textContent = document.getElementById('toLocation').value || 'Nehru Nagar, Perungudi, Chennai TN 600041, IN';
     
+    // Update amount
+    const amount = document.getElementById('tripAmount').value;
+    document.getElementById('previewAmount').textContent = amount ? `₹ ${parseFloat(amount).toFixed(2)}` : '₹ 0.00';
+    
     // Update date and time
     const date = document.getElementById('tripDate').value;
     const time = document.getElementById('tripTime').value;
@@ -259,6 +262,7 @@ function handleFormSubmit(e) {
         viaService: document.getElementById('viaService').value,
         fromLocation: document.getElementById('fromLocation').value,
         toLocation: document.getElementById('toLocation').value,
+        amount: document.getElementById('tripAmount').value,
         driverName: document.getElementById('driverName').value,
         licensePlate: document.getElementById('licensePlate').value,
         passengerCapacity: document.getElementById('passengerCapacity').value,
@@ -275,6 +279,7 @@ function handleFormSubmit(e) {
     document.getElementById('passengerName').value = '';
     document.getElementById('fromLocation').value = '';
     document.getElementById('toLocation').value = '';
+    document.getElementById('tripAmount').value = '';
     setCurrentDateTime();
     
     // Scroll to trips section
@@ -325,6 +330,7 @@ function loadTrips() {
                 <small>From: ${trip.fromLocation}</small><br>
                 <small>To: ${trip.toLocation}</small><br>
                 <small>Via: ${trip.viaService}</small>
+                ${trip.amount ? `<br><small>Amount: ₹ ${parseFloat(trip.amount).toFixed(2)}</small>` : ''}
             </div>
             <div class="trip-actions">
                 <button class="download-btn" data-index="${index}">Download</button>
@@ -361,7 +367,11 @@ function loadTrips() {
 
 function downloadWaybill() {
     // Use html2canvas to convert the waybill preview to an image
-    html2canvas(document.getElementById('waybillPreview')).then(canvas => {
+    html2canvas(document.getElementById('waybillPreview'), {
+        scale: 2, // Higher resolution
+        logging: false,
+        useCORS: true
+    }).then(canvas => {
         // Create a download link
         const link = document.createElement('a');
         link.download = `waybill-${document.getElementById('previewTripId').textContent}.jpg`;
@@ -396,6 +406,7 @@ function downloadTrip(trip) {
     tempWaybill.querySelector('#previewVia').textContent = trip.viaService;
     tempWaybill.querySelector('#previewFrom').textContent = trip.fromLocation;
     tempWaybill.querySelector('#previewTo').textContent = trip.toLocation;
+    tempWaybill.querySelector('#previewAmount').textContent = trip.amount ? `₹ ${parseFloat(trip.amount).toFixed(2)}` : '₹ 0.00';
     tempWaybill.querySelector('#previewDriver').textContent = trip.driverName;
     tempWaybill.querySelector('#previewLicense').textContent = trip.licensePlate;
     tempWaybill.querySelector('#previewCapacity').textContent = trip.passengerCapacity;
@@ -406,7 +417,11 @@ function downloadTrip(trip) {
     document.body.appendChild(tempWaybill);
     
     // Convert to image and download
-    html2canvas(tempWaybill).then(canvas => {
+    html2canvas(tempWaybill, {
+        scale: 2, // Higher resolution
+        logging: false,
+        useCORS: true
+    }).then(canvas => {
         const link = document.createElement('a');
         link.download = `waybill-${trip.id}.jpg`;
         link.href = canvas.toDataURL('image/jpeg', 0.9);
@@ -423,6 +438,7 @@ function editTrip(trip, index) {
     document.getElementById('viaService').value = trip.viaService;
     document.getElementById('fromLocation').value = trip.fromLocation;
     document.getElementById('toLocation').value = trip.toLocation;
+    document.getElementById('tripAmount').value = trip.amount || '';
     document.getElementById('tripDate').value = trip.date;
     document.getElementById('tripTime').value = trip.time;
     document.getElementById('timeFormat').value = trip.timeFormat;
@@ -460,6 +476,7 @@ function editTrip(trip, index) {
             viaService: document.getElementById('viaService').value,
             fromLocation: document.getElementById('fromLocation').value,
             toLocation: document.getElementById('toLocation').value,
+            amount: document.getElementById('tripAmount').value,
             driverName: document.getElementById('driverName').value,
             licensePlate: document.getElementById('licensePlate').value,
             passengerCapacity: document.getElementById('passengerCapacity').value,

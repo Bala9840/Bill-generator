@@ -231,18 +231,32 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     background: #c0392b;
 }
 
+/* Waybill Preview Styles */
 .waybill {
     background: white;
     padding: 25px;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 20px;
+    line-height: 1.5;
 }
 
-.waybill h1 {
-    text-align: center;
+.waybill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #2c3e50;
+}
+
+.waybill-header h1 {
+    margin: 0;
     color: #2c3e50;
+}
+
+.waybill-id {
+    font-size: 14px;
 }
 
 .waybill h2 {
@@ -252,12 +266,19 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     padding-bottom: 8px;
 }
 
-.waybill p {
-    margin: 12px 0;
+.waybill-row {
+    display: flex;
+    margin: 10px 0;
 }
 
-.waybill strong {
+.waybill-label {
+    flex: 1;
+    font-weight: bold;
     color: #2c3e50;
+}
+
+.waybill-value {
+    flex: 2;
 }
 
 .trips-section, .driver-profile-section {
@@ -343,7 +364,6 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
         flex-direction: column;
         align-items: flex-start;
     }
-      
     
     .waybill-id {
         margin-top: 10px;
