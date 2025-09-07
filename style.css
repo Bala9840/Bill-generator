@@ -338,4 +338,22 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     .footer-content {
         flex-direction: column;
     }
+    
+    .waybill-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+      
+    
+    .waybill-id {
+        margin-top: 10px;
+    }
+    
+    .waybill-row {
+        flex-direction: column;
+    }
+    
+    .waybill-label {
+        margin-bottom: 5px;
+    }
 }
