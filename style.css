@@ -12,10 +12,12 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
     flex: 1;
@@ -27,10 +29,11 @@ header {
     color: white;
     padding: 15px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .header-content {
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -67,10 +70,11 @@ footer {
     color: white;
     padding: 30px 0 15px;
     margin-top: 40px;
+    width: 100%;
 }
 
 .footer-content {
-    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -119,6 +123,7 @@ footer {
     display: flex;
     gap: 30px;
     margin-bottom: 40px;
+    width: 100%;
 }
 
 .form-section, .preview-section {
@@ -127,6 +132,7 @@ footer {
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 h2 {
@@ -231,21 +237,26 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     background: #c0392b;
 }
 
-/* Waybill Preview Styles */
+/* Waybill Preview Styles - Increased height */
 .waybill {
     background: white;
-    padding: 25px;
+    padding: 30px;
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 20px;
-    line-height: 1.5;
+    line-height: 1.4;
+    width: 100%;
+    min-height: 630px; /* Increased minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .waybill-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     padding-bottom: 15px;
     border-bottom: 2px solid #2c3e50;
 }
@@ -253,6 +264,7 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
 .waybill-header h1 {
     margin: 0;
     color: #2c3e50;
+    font-size: 28px;
 }
 
 .waybill-id {
@@ -261,24 +273,39 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
 
 .waybill h2 {
     color: #2c3e50;
-    margin-top: 20px;
+    margin-top: 25px;
+    margin-bottom: 15px;
     border-bottom: 1px solid #eee;
-    padding-bottom: 8px;
+    padding-bottom: 10px;
+    font-size: 20px;
 }
 
 .waybill-row {
     display: flex;
-    margin: 10px 0;
+    margin: 12px 0;
+    flex-wrap: wrap;
 }
 
 .waybill-label {
     flex: 1;
     font-weight: bold;
     color: #2c3e50;
+    min-width: 120px;
+    font-size: 16px;
 }
 
 .waybill-value {
     flex: 2;
+    min-width: 150px;
+    word-break: break-word;
+    font-size: 16px;
+    padding: 2px 0;
+}
+
+.waybill hr {
+    margin: 25px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
 }
 
 .trips-section, .driver-profile-section {
@@ -287,6 +314,7 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .trips-list {
@@ -348,17 +376,50 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
 
 /* Mobile Responsive Styles */
 @media (max-width: 900px) {
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        padding: 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
     .app-container {
         flex-direction: column;
+        gap: 20px;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
     }
     
     .header-content {
         flex-direction: column;
         gap: 15px;
+        padding: 0 15px;
+        width: 100%;
     }
     
     .footer-content {
         flex-direction: column;
+        padding: 0 15px;
+        width: 100%;
+    }
+    
+    .form-section, .preview-section, .trips-section, .driver-profile-section {
+        padding: 20px;
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .waybill {
+        padding: 20px;
+        line-height: 1.4;
+        min-height: 630px; /* Increased for mobile */
     }
     
     .waybill-header {
@@ -377,10 +438,12 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
     .waybill-label {
         margin-bottom: 0;
         flex: 1;
+        min-width: 100px;
     }
     
     .waybill-value {
         flex: 2;
+        min-width: 120px;
     }
     
     .trip-item {
@@ -412,27 +475,75 @@ button[type="submit"]:hover, #downloadBtn:hover, #saveProfileBtn:hover {
 @media (max-width: 480px) {
     .container {
         padding: 10px;
+        width: 100%;
+        max-width: 100%;
     }
     
     .form-section, .preview-section, .trips-section, .driver-profile-section {
         padding: 15px;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 8px;
     }
     
     .waybill {
         padding: 15px;
+        width: 100%;
+        border-radius: 8px;
+        line-height: 1.4;
+        border: 1px solid #ddd;
+        min-height: 630px; /* Even more height for small mobile */
     }
     
     .waybill-row {
-        flex-direction: column;
-        margin: 8px 0;
+        flex-direction: row;
+        margin: 10px 0;
     }
     
     .waybill-label {
-        margin-bottom: 3px;
+        margin-bottom: 0;
+        flex: 1;
+        min-width: 90px;
+        font-size: 14px;
+    }
+    
+    .waybill-value {
+        flex: 2;
+        min-width: 110px;
+        font-size: 14px;
+    }
+    
+    .waybill-header h1 {
+        font-size: 24px;
+    }
+    
+    .waybill h2 {
+        font-size: 18px;
     }
     
     button[type="submit"], #downloadBtn, .trip-actions button, #saveProfileBtn {
         padding: 12px 15px;
         font-size: 14px;
+    }
+    
+    /* Additional mobile width adjustments */
+    .header-content, .footer-content {
+        padding: 0 10px;
+    }
+    
+    .header-nav {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+    
+    /* Remove any remaining max-width constraints */
+    .profile-form {
+        max-width: 100%;
     }
 }
