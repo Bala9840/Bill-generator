@@ -1,2 +1,2 @@
-# Bill Generator
+# Bill Generators
 
